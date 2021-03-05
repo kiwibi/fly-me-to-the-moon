@@ -6,8 +6,9 @@ public class AstronautMovement : MonoBehaviour
 {
     private enum rotationDir
     {
-        LEFT,
-        RIGHT
+        RIGHT,
+        LEFT
+        
     }
 
     [Header("Astronauts")]
@@ -25,9 +26,6 @@ public class AstronautMovement : MonoBehaviour
     private Vector3 tmpPos_;
     private Vector3 releaseDir_;
 
-    private Rigidbody2D rb1_;
-    private Rigidbody2D rb2_;
-
     private GameObject currentAstronaut_;
 
     private Transform arrowChild_;
@@ -39,8 +37,6 @@ public class AstronautMovement : MonoBehaviour
     void Start()
     {
         lr_ = GetComponent<LineRenderer>();
-        rb1_ = astronaut1.GetComponent<Rigidbody2D>();
-        rb2_ = astronaut2.GetComponent<Rigidbody2D>();
         arrowChild_ = arrowAnchor_.transform.GetChild(0);
         currentAstronaut_ = astronaut1;
         tmpPos_ = Vector3.zero;
@@ -54,6 +50,8 @@ public class AstronautMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Push(currentDir);
+            ChangeArrowDir();
+
         }
         lr_.SetPosition(0, currentAstronaut_.transform.position);
         lr_.SetPosition(1, arrowChild_.position);
@@ -88,16 +86,14 @@ public class AstronautMovement : MonoBehaviour
                 releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
                 magnitude = releaseDir_.magnitude;
                 releaseDir_ = releaseDir_ / magnitude;
-                currentAstronaut_.GetComponent<Rigidbody2D>().AddForce(releaseDir_ * pushforce_ * orbitSpeed_);
                 break;
             case rotationDir.RIGHT:
-                releaseDir_ = Vector2.Perpendicular(currentAstronaut_.transform.position - arrowChild_.position);
+                releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
                 magnitude = releaseDir_.magnitude;
                 releaseDir_ = releaseDir_ / magnitude;
-                releaseDir_ *= -1;
-                currentAstronaut_.GetComponent<Rigidbody2D>().AddForce(releaseDir_ * pushforce_ * orbitSpeed_);
                 break;
         }
+        currentAstronaut_.GetComponent<Rigidbody2D>().AddForce(releaseDir_ * pushforce_ * orbitSpeed_);
         ChangeAstronaut();
     }
 
@@ -110,6 +106,17 @@ public class AstronautMovement : MonoBehaviour
         else
         {
             currentAstronaut_ = astronaut1;
+        }
+    }
+
+    private void ChangeArrowDir()
+    {
+        if(currentDir == rotationDir.LEFT)
+        {
+            currentDir = rotationDir.RIGHT;
+        }else
+        {
+            currentDir = rotationDir.LEFT;
         }
     }
 
