@@ -7,31 +7,30 @@ public class CameraFollow : MonoBehaviour
     private GameObject[] astronauts_;
     private Vector3 smoothedPosition_;
 
-    public float smoothSpeed_;
+    public float speed_;
 
     void Start()
     {
         astronauts_ = GameObject.FindGameObjectsWithTag("Astronaut");
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        MoveCamera();
-    }
+        float interpolation = speed_ * Time.deltaTime;
 
+        Vector3 position = this.transform.position;
+        Vector3 desiredPos = FindMiddle();
+        position.y = Mathf.Lerp(this.transform.position.y, desiredPos.y, interpolation);
+        position.x = Mathf.Lerp(this.transform.position.x, desiredPos.x, interpolation);
+
+        this.transform.position = position;
+    }
     private Vector3 FindMiddle()
     {
         Vector3 tmp = Vector3.zero;
-        tmp.x = (astronauts_[0].transform.position.x + astronauts_[1].transform.position.x) / 2;
+        tmp.x = ((astronauts_[0].transform.position.x + astronauts_[1].transform.position.x) / 2) + 7;
         tmp.y = (astronauts_[0].transform.position.y + astronauts_[1].transform.position.y) / 2;
         tmp.z = -10;
         return tmp;
-    }
-
-    private void MoveCamera()
-    {
-        smoothedPosition_ = Vector3.Lerp(transform.position, FindMiddle(), smoothSpeed_);
-        transform.position = smoothedPosition_;
     }
 }
