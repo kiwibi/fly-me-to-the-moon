@@ -27,6 +27,7 @@ public class moonScale : MonoBehaviour
         if(distTraveled_ >= distanceToGrow_)
         {
             ScaleUp();
+            distTraveled_ = distTraveled_ - distanceToGrow_;
         }
     }
 
