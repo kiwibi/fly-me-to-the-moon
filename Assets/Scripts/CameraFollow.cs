@@ -20,10 +20,11 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 position = this.transform.position;
         Vector3 desiredPos = FindMiddle();
+        float dst = Vector3.Distance(transform.position, desiredPos);
         position.y = Mathf.Lerp(this.transform.position.y, desiredPos.y, interpolation);
         position.x = Mathf.Lerp(this.transform.position.x, desiredPos.x, interpolation);
 
-        this.transform.position = position;
+        this.transform.position = FindMiddle();
     }
     private Vector3 FindMiddle()
     {
@@ -33,4 +34,22 @@ public class CameraFollow : MonoBehaviour
         tmp.z = -10;
         return tmp;
     }
+    /*
+     TODO:
+        spawner
+            2 tiers minimum
+            random sprite
+        astronaut
+            cap top speed
+            cooldown (hide arrow)
+            change spin direction index(interval)
+                change color
+            death rope dmg
+        feel:
+            static / screen flicker
+        end area
+        soundManager
+        musicplayer
+        
+     */
 }
