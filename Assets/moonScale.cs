@@ -13,12 +13,14 @@ public class moonScale : MonoBehaviour
     private GameObject[] astronauts_;
 
     private float distTraveled_;
+    private float distIncreemnt_;
     private float oldX_;
     void Start()
     {
         astronauts_ = GameObject.FindGameObjectsWithTag("Astronaut");
         distTraveled_ = 0;
         oldX_ = FindMiddle();
+        distIncreemnt_ = distanceToGrow_;
     }
 
     void Update()
@@ -27,7 +29,7 @@ public class moonScale : MonoBehaviour
         if(distTraveled_ >= distanceToGrow_)
         {
             ScaleUp();
-            distTraveled_ = distTraveled_ - distanceToGrow_;
+            distanceToGrow_ += distIncreemnt_;
         }
     }
 
