@@ -127,4 +127,4 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: -0
-    m_UpperAngle: 0
+    m_UpperAngle: 21.286467
