@@ -13,7 +13,7 @@ public class MoonPosition : MonoBehaviour
     private Vector3 GetNewPos()
     {
         Vector3 tmp = Vector3.zero;
-        tmp.x = camera_.position.x + 7;
+        tmp.x = transform.position.x;
         tmp.y = camera_.position.y;
         tmp.z = 0;
         return tmp;
@@ -22,5 +22,13 @@ public class MoonPosition : MonoBehaviour
     void Update()
     {
         transform.position = GetNewPos();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Astronaut")
+        {
+            Debug.Log("WIN");
+        }
     }
 }
