@@ -455,16 +455,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astronaut1: {fileID: 1473502320}
   astronaut2: {fileID: 2060325510}
+  pssh_: {fileID: 739444471970971241, guid: 37bbb6c927eafb3478bcec96597e01ba, type: 3}
   astronautSpeedCap_: 300
   fakeOut_: 4
   arrowAnchor_: {fileID: 694173997}
   orbitSpeed_: 25
   orbitDistance_: 0.5
-  pushforce_: 2000
+  pushforce_: 20000
   arrowDelay_: 0.25
   arrowColors_:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0.19339621, b: 0.19339621, a: 1}
+  currentAstronaut_: {fileID: 0}
 --- !u!4 &587993961
 Transform:
   m_ObjectHideFlags: 0
@@ -646,7 +648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1259941729
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1099,7 +1101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1700397227
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1679,12 +1681,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068180061}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04fe9d9c5c7c4fa4db0420eb4cb890b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tier1Objects_: []
+  Tier1Objects_:
+  - {fileID: 9132252510643393656, guid: 088f6b159512eeb40925f74037ec437f, type: 3}
   Tier1MinSpawnDelay_: 1
   Tier1MaxSpawnDelay_: 2
   Tier2Objects_: []
@@ -1707,17 +1710,17 @@ PrefabInstance:
     - target: {fileID: 7458153832109392624, guid: 7faad0c6a388f844fab8a9dbfe0df039,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.964684
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7458153832109392624, guid: 7faad0c6a388f844fab8a9dbfe0df039,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9426303
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7458153832109392624, guid: 7faad0c6a388f844fab8a9dbfe0df039,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -51.0625
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7458153832109392624, guid: 7faad0c6a388f844fab8a9dbfe0df039,
         type: 3}
@@ -1759,5 +1762,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: bigBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 8238539046179374332, guid: 7faad0c6a388f844fab8a9dbfe0df039,
+        type: 3}
+      propertyPath: astroMove_
+      value: 
+      objectReference: {fileID: 587993959}
+    - target: {fileID: 8238539046179374332, guid: 7faad0c6a388f844fab8a9dbfe0df039,
+        type: 3}
+      propertyPath: astronaut_
+      value: 
+      objectReference: {fileID: 1473502320}
+    - target: {fileID: 8238539046179374332, guid: 7faad0c6a388f844fab8a9dbfe0df039,
+        type: 3}
+      propertyPath: astronaut2_
+      value: 
+      objectReference: {fileID: 2060325510}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7faad0c6a388f844fab8a9dbfe0df039, type: 3}

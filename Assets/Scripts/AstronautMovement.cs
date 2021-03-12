@@ -36,7 +36,8 @@ public class AstronautMovement : MonoBehaviour
     private Vector3 tmpPos_;
     private Vector3 releaseDir_ = Vector3.zero;
 
-    private GameObject currentAstronaut_;
+    [HideInInspector]
+    public GameObject currentAstronaut_;
 
     private Transform arrowChild_;
 
@@ -107,21 +108,23 @@ public class AstronautMovement : MonoBehaviour
                 changeArrowColor();
                 fakeTimer_ = 0;
                 fakeRange_ = Random.Range(0, fakeOut_ + 1);
+                Instantiate(pssh_, currentAstronaut_.transform.position, GetFakeRotation());
             }
             else
             {
                 releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
                 fakeTimer_++;
+                Instantiate(pssh_, currentAstronaut_.transform.position, arrowChild_.rotation);
             }
         }
         else
         {
             
             releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
+            Instantiate(pssh_, currentAstronaut_.transform.position, arrowChild_.rotation);
         }
         ArrowCooldown(onDelay_);
         StartCoroutine(delay());
-        Instantiate(pssh_, currentAstronaut_.transform.position, arrowChild_.rotation);
         releaseDir_.Normalize();
         currentAstronaut_.GetComponent<Rigidbody2D>().AddForce(releaseDir_ * pushforce_);
         ChangeAstronaut();
@@ -204,14 +207,16 @@ public class AstronautMovement : MonoBehaviour
        
     }
 
-    private Quaternion RotatePssh(Vector3 dir)
+    private Quaternion GetFakeRotation()
     {
-        Vector3 up = new Vector3(0, 1, 0);
+        Vector3 dir = (currentAstronaut_.transform.position - arrowChild_.position);
+        Vector3 up = new Vector3(0, 0, 1);
         var rotation = Quaternion.LookRotation(dir, up);
-        rotation.z = 90;
-        rotation.y = 90;
+        rotation.x = 0;
+        rotation.y = 0;
         return rotation;
     }
+
     private void capSpeed()
     {
         if(currentAstronaut_.GetComponent<Rigidbody2D>().velocity.magnitude >= astronautSpeedCap_)
