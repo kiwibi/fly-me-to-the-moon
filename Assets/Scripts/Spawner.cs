@@ -59,7 +59,6 @@ public class Spawner : MonoBehaviour
 
     private void SpawnTier1()
     {
-        Debug.Log("spawn");
         var rot = Random.rotation;
         rot.x = 0;
         rot.y = 0;

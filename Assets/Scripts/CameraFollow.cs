@@ -24,7 +24,7 @@ public class CameraFollow : MonoBehaviour
         position.y = Mathf.Lerp(this.transform.position.y, desiredPos.y, interpolation);
         position.x = Mathf.Lerp(this.transform.position.x, desiredPos.x, interpolation);
 
-        this.transform.position = FindMiddle();
+        this.transform.position = position;
     }
     private Vector3 FindMiddle()
     {

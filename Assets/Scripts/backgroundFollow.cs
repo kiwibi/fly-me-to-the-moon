@@ -13,6 +13,7 @@ public class backgroundFollow : MonoBehaviour
 
     private Transform camera_;
     private float xStep_ = 70.78f;
+    private float travelledX_;
     private float lastCamX_;
 
     private Vector3 rotationFlip = new Vector3(180, 0, 180);
@@ -28,13 +29,14 @@ public class backgroundFollow : MonoBehaviour
 
     private void Update()
     {
-        
-        if((camera_.position.x - lastCamX_) >= xStep_)
+        travelledX_ = transform.position.x;
+        if ((camera_.position.x - lastCamX_ - travelledX_) >= xStep_)
         {
+            Debug.Log("W");
             MovePanel(FindLastPanel(Dir.LEFT),Dir.LEFT);
             lastCamX_ = camera_.position.x;
         }
-        else if((camera_.position.x - lastCamX_) <= -xStep_)
+        else if((camera_.position.x - lastCamX_ - travelledX_) <= -xStep_)
         {
             MovePanel(FindLastPanel(Dir.RIGHT), Dir.RIGHT);
             lastCamX_ = camera_.position.x;
@@ -107,7 +109,7 @@ public class backgroundFollow : MonoBehaviour
                 tmp = new Vector3(childen_[index].position.x + (xStep_ * 3), childen_[index].position.y, childen_[index].position.z);
                 break;
             case Dir.RIGHT:
-                tmp = new Vector3(childen_[index].position.x - (xStep_ * 3), childen_[index].position.y, childen_[index].position.z);
+                tmp = new Vector3(childen_[index].position.x - travelledX_ - (xStep_ * 3), childen_[index].position.y, childen_[index].position.z);
                 break;
         }
         return tmp;
