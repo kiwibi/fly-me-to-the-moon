@@ -14,47 +14,65 @@ public class AstronautMovement : MonoBehaviour
     [Header("Astronauts")]
     public GameObject astronaut1;
     public GameObject astronaut2;
+    public GameObject pssh_;
+
+    public float astronautSpeedCap_;
+    public float fakeOut_;
 
     [Header("arrow variables")]
     public GameObject arrowAnchor_;
     public float orbitSpeed_;
     public float orbitDistance_;
     public float pushforce_;
+    public float arrowDelay_ = 0.25f;
+    public Color[] arrowColors_;
 
     private float orbit_;
+    private float fakeTimer_;
+    private float fakeRange_;
+    
+    private bool onDelay_ = false;
 
     private Vector3 tmpPos_;
-    private Vector3 releaseDir_;
+    private Vector3 releaseDir_ = Vector3.zero;
 
     private GameObject currentAstronaut_;
 
     private Transform arrowChild_;
 
+    private SpriteRenderer arrowSprite_;
+
     private rotationDir currentDir = rotationDir.LEFT;
 
-    private LineRenderer lr_;
 
     void Start()
     {
-        lr_ = GetComponent<LineRenderer>();
         arrowChild_ = arrowAnchor_.transform.GetChild(0);
         currentAstronaut_ = astronaut1;
         tmpPos_ = Vector3.zero;
         orbit_ = (Mathf.PI / 2) * 3;
+        fakeRange_ = Random.Range(0, fakeOut_ + 1);
+        fakeTimer_ = 0;
+        arrowSprite_ = arrowChild_.GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         UpdateArrowPos(currentAstronaut_.transform);
         RotateArrow(currentDir);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onDelay_ == false)
         {
-            Push(currentDir);
-            ChangeArrowDir();
-
+            Push();
+            if(Random.Range(0, 8) == 2)
+            {
+                ChangeArrowDir();
+            }
         }
-        lr_.SetPosition(0, currentAstronaut_.transform.position);
-        lr_.SetPosition(1, arrowChild_.position);
+    }
+
+    private void FixedUpdate()
+    {
+        capSpeed();
     }
 
     void RotateArrow(rotationDir dir)
@@ -77,23 +95,35 @@ public class AstronautMovement : MonoBehaviour
                 break;
         }
     }
-    private void Push(rotationDir dir)
+    private void Push()
     {
         float magnitude = 0;
-        switch (dir)
+        if (currentAstronaut_.name == "Astronaut 2")
         {
-            case rotationDir.LEFT:
+            if(fakeTimer_ >= fakeRange_)
+            {
                 releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
-                magnitude = releaseDir_.magnitude;
-                releaseDir_ = releaseDir_ / magnitude;
-                break;
-            case rotationDir.RIGHT:
+                releaseDir_ *= -1;
+                changeArrowColor();
+                fakeTimer_ = 0;
+                fakeRange_ = Random.Range(0, fakeOut_ + 1);
+            }
+            else
+            {
                 releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
-                magnitude = releaseDir_.magnitude;
-                releaseDir_ = releaseDir_ / magnitude;
-                break;
+                fakeTimer_++;
+            }
         }
-        currentAstronaut_.GetComponent<Rigidbody2D>().AddForce(releaseDir_ * pushforce_ * orbitSpeed_);
+        else
+        {
+            
+            releaseDir_ = arrowChild_.position - currentAstronaut_.transform.position;
+        }
+        ArrowCooldown(onDelay_);
+        StartCoroutine(delay());
+        Instantiate(pssh_, currentAstronaut_.transform.position, arrowChild_.rotation);
+        releaseDir_.Normalize();
+        currentAstronaut_.GetComponent<Rigidbody2D>().AddForce(releaseDir_ * pushforce_);
         ChangeAstronaut();
     }
 
@@ -102,10 +132,26 @@ public class AstronautMovement : MonoBehaviour
         if(currentAstronaut_.name == astronaut1.name)
         {
             currentAstronaut_ = astronaut2;
+            if(fakeTimer_ >= fakeRange_)
+            {
+                changeArrowColor();
+            }
         }
         else
         {
             currentAstronaut_ = astronaut1;
+        }
+    }
+
+    private void changeArrowColor()
+    {
+        if(arrowSprite_.color == arrowColors_[0])
+        {
+            arrowSprite_.color = arrowColors_[1];
+        }
+        else
+        {
+            arrowSprite_.color = arrowColors_[0];
         }
     }
 
@@ -123,5 +169,54 @@ public class AstronautMovement : MonoBehaviour
     private void UpdateArrowPos(Transform newPos)
     {
         arrowAnchor_.transform.position = newPos.position;
+        RotateArrowSprite();
+    }
+    private void ArrowCooldown(bool onCooldown)
+    {
+        if(onCooldown)
+        {
+            arrowSprite_.enabled = true;
+            onDelay_ = false;           
+        }
+        else
+        {
+            arrowSprite_.enabled = false;
+            onDelay_ = true;
+        }
+    }
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(arrowDelay_);
+        ArrowCooldown(onDelay_);
+    }
+
+    private void RotateArrowSprite()
+    {
+        if((arrowChild_.position - currentAstronaut_.transform.position) != Vector3.zero)
+        {
+            Vector3 dir = (arrowChild_.position - currentAstronaut_.transform.position);
+            Vector3 up = new Vector3(0, 0, 1);
+            var rotation = Quaternion.LookRotation(dir, up);
+            rotation.x = 0;
+            rotation.y = 0;
+            arrowChild_.rotation = rotation;
+        }
+       
+    }
+
+    private Quaternion RotatePssh(Vector3 dir)
+    {
+        Vector3 up = new Vector3(0, 1, 0);
+        var rotation = Quaternion.LookRotation(dir, up);
+        rotation.z = 90;
+        rotation.y = 90;
+        return rotation;
+    }
+    private void capSpeed()
+    {
+        if(currentAstronaut_.GetComponent<Rigidbody2D>().velocity.magnitude >= astronautSpeedCap_)
+        {
+            currentAstronaut_.GetComponent<Rigidbody2D>().velocity = currentAstronaut_.GetComponent<Rigidbody2D>().velocity.normalized * astronautSpeedCap_;
+        }
     }
 }
