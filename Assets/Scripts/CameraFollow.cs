@@ -34,20 +34,11 @@ public class CameraFollow : MonoBehaviour
         tmp.z = -10;
         return tmp;
     }
+
     /*
      TODO:
-        spawner
-            2 tiers minimum
-            random sprite
-        astronaut
-            cap top speed
-            cooldown (hide arrow)
-            change spin direction index(interval)
-                change color
-            death rope dmg
         feel:
             static / screen flicker
-        end area
         soundManager
         musicplayer
         
