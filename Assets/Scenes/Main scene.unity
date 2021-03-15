@@ -270,7 +270,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 314b8c4a02060a6479c2159530c1e64d, type: 3}
+  m_Sprite: {fileID: 1552605450742260290, guid: 06dcfc0e7d27b77408ef6605af493215,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -278,7 +279,7 @@ SpriteRenderer:
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &587460559
@@ -820,12 +821,12 @@ PrefabInstance:
     - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
         type: 3}
       propertyPath: Tier1MaxSpawnDelay_
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
         type: 3}
       propertyPath: Tier1MinSpawnDelay_
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
         type: 3}
@@ -840,7 +841,7 @@ PrefabInstance:
     - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
         type: 3}
       propertyPath: Tier1Objects_.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
         type: 3}
@@ -922,6 +923,12 @@ PrefabInstance:
     - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
         type: 3}
       propertyPath: Tier1Objects_.Array.data[11]
+      value: 
+      objectReference: {fileID: 9132252510643393656, guid: 088f6b159512eeb40925f74037ec437f,
+        type: 3}
+    - target: {fileID: 3870854580188031146, guid: 34148d91c0a4bfc499d1f4c6572f6c2f,
+        type: 3}
+      propertyPath: Tier1Objects_.Array.data[12]
       value: 
       objectReference: {fileID: 9132252510643393656, guid: 088f6b159512eeb40925f74037ec437f,
         type: 3}
