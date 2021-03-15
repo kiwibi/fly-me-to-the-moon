@@ -11,7 +11,7 @@ public class Attractor : MonoBehaviour
     private Rigidbody2D[] astronauts_ = new Rigidbody2D[2];
     private void Start()
     {
-        var astronauts = GameObject.FindGameObjectsWithTag("Astronauts");
+        var astronauts = GameObject.FindGameObjectsWithTag("Astronaut");
         for (int i = 0; i < 2; i++)
         {
             astronauts_[i] = astronauts[i].GetComponent<Rigidbody2D>();
@@ -34,6 +34,7 @@ public class Attractor : MonoBehaviour
         if (distance > minDistance_)
         {
             rbToAttract.AddForce(force);
+            Debug.Log("W");
         }
     }
 }
