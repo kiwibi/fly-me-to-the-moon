@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5215673288708453010}
   - component: {fileID: 3029762391851441309}
+  - component: {fileID: 5673800604525151007}
   m_Layer: 0
   m_Name: Rock2
   m_TagString: Untagged
@@ -45,9 +46,30 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.4, y: -1.8}
-  m_Size: {x: 1.6, y: 3}
+  m_Offset: {x: -0.17624706, y: 0.014111996}
+  m_Size: {x: 1.3672172, y: 2.5996885}
   m_Direction: 0
+--- !u!50 &5673800604525151007
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390380028112700471}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 100
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1610799562185876625
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,7 +95,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610799562185876625}
   m_LocalRotation: {x: -0, y: -0, z: -0.22998291, w: 0.97319466}
-  m_LocalPosition: {x: 5.589, y: -1.909, z: 0.76141655}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2411923, y: 0.2411923, z: 0.2411923}
   m_Children: []
   m_Father: {fileID: 5215673288708453010}

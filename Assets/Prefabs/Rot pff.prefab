@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5257686434232643442}
+  - component: {fileID: 6786519588885515381}
   m_Layer: 0
   m_Name: Rot pff
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6786519588885515381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739444471970971241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a4f9a3387b4cf46b9a4681f49f71a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyAfter: 1
 --- !u!1001 &4100194811050896070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,6 +56,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pff
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904193396877259727, guid: 38afcf1ecf472cf4faed7c9497c5f7c6,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044290994763862356, guid: 38afcf1ecf472cf4faed7c9497c5f7c6,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.123
       objectReference: {fileID: 0}
     - target: {fileID: 7230925953716225938, guid: 38afcf1ecf472cf4faed7c9497c5f7c6,
         type: 3}
@@ -97,6 +121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7281573915223898987, guid: 38afcf1ecf472cf4faed7c9497c5f7c6,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38afcf1ecf472cf4faed7c9497c5f7c6, type: 3}
